@@ -1,14 +1,24 @@
 import React from 'react';
+import { useAuth } from '../Login/useAuth';
+
+
+
+
 
 const Cart = (props) => {
     const cart = props.cart;
-    console.log(cart);
-    // const totalPrise = cart.reduce((totalPrise, prd) => totalPrise + prd.price,0)
+
+    //const auth = useAuth();
+    //context API (data pass)
+
+    //console.log(auth.user);
+    //const totalPrise = cart.reduce((totalPrise,  prd) => totalPrise + prd.price,0)
 
     let totalPrise = 0;
     for(let i=0; i<cart.length; i++){
         const product = cart[i];
-        totalPrise = totalPrise + product.price;
+        totalPrise = totalPrise + product.price * product.quantity;
+       
     }
 
     let shipping = 0;
@@ -38,8 +48,13 @@ const Cart = (props) => {
             <p><small>Tax: {tax}</small></p>
             <p><small>Shipping: {shipping}</small></p>
             <p>Total Price: {grandTotal}</p>
+            {
+                props.children
+            }
+            <p>{}</p>
+            
         </div>
-    );
+    ); 
 };
 
 export default Cart;
